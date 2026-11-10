@@ -4,7 +4,7 @@ Personal finance app. Native Next.js App Router, React, TypeScript, Neon Postgre
 
 ## Access
 
-The owner has explicitly chosen **public link access** until app sign-in is added. Anyone who can reach the URL can view and edit the shared ledger. There are no separate user accounts yet. The GitHub repository and database credentials remain private.
+The owner has explicitly chosen **public link access** until app sign-in is added. Anyone who can reach the URL can view and edit the shared ledger. There are no separate user accounts yet. The source repository is public. Database credentials and financial backups are excluded from Git.
 
 Set `LEDGER_ACCESS_MODE=public-link` for the current deployment. To restore a hosting login, enable Vercel Authentication for All Deployments and use `vercel-protected`. Local development can use `local`. Production refuses to run outside the configured Vercel environment. Keep the same-origin checks and optimistic concurrency protections in either mode.
 
@@ -28,4 +28,4 @@ The ledger is stored as a versioned JSONB document in Postgres. Writes use optim
 
 ## Deployment
 
-Connect this private GitHub repository to the Vercel project. Connect the Neon **free** integration to production, add `LEDGER_ACCESS_MODE`, apply the schema, import the current backup, and deploy. Current production uses `public-link` with Vercel Authentication disabled, as requested by the owner. Add application sign-in before supporting separate users. Do not point preview deployments at production data when collaborating with others.
+Connect this GitHub repository to the Vercel project. Connect the Neon **free** integration to production, add `LEDGER_ACCESS_MODE`, apply the schema, import the current backup, and deploy. Current production uses `public-link` with Vercel Authentication disabled, as requested by the owner. Add application sign-in before supporting separate users. Do not point preview deployments at production data when collaborating with others.
