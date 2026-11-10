@@ -1,4 +1,4 @@
 import Ledger from './ledger';
-import { assertPrivateHosting } from '../lib/access';
+import { assertHostingConfigured } from '../lib/access';
 export const dynamic='force-dynamic';
-export default function Home(){assertPrivateHosting();return <Ledger/>}
+export default function Home(){assertHostingConfigured();return <Ledger/>}

@@ -1,11 +1,11 @@
 import { database } from '../../../lib/db';
-import { assertPrivateHosting,sameOrigin } from '../../../lib/access';
+import { assertHostingConfigured,sameOrigin } from '../../../lib/access';
 import { schema } from '../../../lib/validation';
 export const dynamic='force-dynamic';
 const json=(v:unknown,status=200)=>Response.json(v,{status,headers:{'Cache-Control':'no-store'}});
 export async function GET(){
  try{
-  assertPrivateHosting();
+  assertHostingConfigured();
   const sql=database();
   const rows=await sql`SELECT body,revision FROM ledgers WHERE id='owner'`;
   if(!rows.length)return json({error:'The ledger has not been imported yet.'},503);
@@ -13,7 +13,7 @@ export async function GET(){
  }catch{return json({error:'Could not load the ledger. Please try again shortly.'},503)}
 }
 export async function PUT(req:Request){
- try{assertPrivateHosting()}catch{return json({error:'Private hosting is not configured.'},503)}
+ try{assertHostingConfigured()}catch{return json({error:'Hosting is not configured.'},503)}
  if(!sameOrigin(req))return json({error:'Save entries from this app.'},403);
  const raw=await req.text();if(raw.length>2000000)return json({error:'Ledger is too large.'},413);
  let parsed;try{parsed=schema.safeParse(JSON.parse(raw))}catch{return json({error:'Invalid request.'},400)}

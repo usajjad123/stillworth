@@ -1,12 +1,12 @@
 # Stillworth
 
-Private, single-owner personal finance app. Native Next.js App Router, React, TypeScript, Neon Postgres, and Vercel.
+Personal finance app. Native Next.js App Router, React, TypeScript, Neon Postgres, and Vercel.
 
 ## Access
 
-**Vercel Authentication must be enabled for All Deployments, including production.** This is the app's access boundary. Keep the Vercel project limited to its owner. Do not make the project public or disable deployment protection. The API is for one private owner ledger; this is not a multi-tenant application.
+The owner has explicitly chosen **public link access** until app sign-in is added. Anyone who can reach the URL can view and edit the shared ledger. There are no separate user accounts yet. The GitHub repository and database credentials remain private.
 
-Set `LEDGER_ACCESS_MODE=vercel-protected` for deployments. Local development can use `LEDGER_ACCESS_MODE=local`. Production refuses to run outside the configured Vercel environment.
+Set `LEDGER_ACCESS_MODE=public-link` for the current deployment. To restore a hosting login, enable Vercel Authentication for All Deployments and use `vercel-protected`. Local development can use `local`. Production refuses to run outside the configured Vercel environment. Keep the same-origin checks and optimistic concurrency protections in either mode.
 
 ## Development
 
@@ -28,4 +28,4 @@ The ledger is stored as a versioned JSONB document in Postgres. Writes use optim
 
 ## Deployment
 
-Connect this private GitHub repository to the Vercel project. Connect the Neon **free** integration to production, add `LEDGER_ACCESS_MODE`, apply the schema, import the current backup, and deploy. Verify `ssoProtection.deploymentType` is `all` before every production deployment. Do not point preview deployments at production data when collaborating with others.
+Connect this private GitHub repository to the Vercel project. Connect the Neon **free** integration to production, add `LEDGER_ACCESS_MODE`, apply the schema, import the current backup, and deploy. Current production uses `public-link` with Vercel Authentication disabled, as requested by the owner. Add application sign-in before supporting separate users. Do not point preview deployments at production data when collaborating with others.
