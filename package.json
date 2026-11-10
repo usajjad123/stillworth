@@ -1,0 +1,35 @@
+{
+  "name": "stillworth",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build --webpack",
+    "start": "next start --hostname 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "db:migrate": "node --env-file=.env.local scripts/migrate.mjs",
+    "db:import": "node --env-file=.env.local scripts/import-ledger.mjs"
+  },
+  "dependencies": {
+    "next": "16.3.4",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "lucide-react": "1.31.0",
+    "zod": "3.25.76",
+    "@neondatabase/serverless": "1.2.0",
+    "server-only": "0.0.1"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@tailwindcss/postcss": "4.2.1",
+    "tailwindcss": "4.2.1"
+  }
+}
