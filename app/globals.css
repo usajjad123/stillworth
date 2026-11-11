@@ -66,6 +66,6 @@ button,input,select,textarea{font:inherit}textarea{resize:vertical;min-width:0;w
 /* One-tap display currency selection. */
 .worth-top{flex-wrap:wrap;gap:14px}.currency-tabs{display:inline-grid;grid-template-columns:repeat(3,minmax(44px,1fr));gap:3px;padding:4px;border:1px solid #708198;border-radius:9px;background:#101d32;isolation:isolate}.currency-tabs button{min-height:44px;padding:6px 10px;border-radius:5px;color:#d8e2ef;font-size:12px;font-weight:500;line-height:1;touch-action:manipulation}.currency-tabs button:hover{background:#2d4264;color:#fff}.currency-tabs button[aria-pressed=true]{background:#eacb99;color:#14243d;box-shadow:0 1px 4px #0002}.currency-tabs button:focus-visible{outline:2px solid #eacb99;outline-offset:2px}@media(max-width:700px){.currency-tabs{width:100%;margin-top:2px}.currency-tabs button{font-size:12px}.worth-top{gap:12px}}
 
-@media(max-width:700px){.topbar{position:sticky;top:0;z-index:20;box-shadow:0 3px 12px #0b162c1a}}
+.topbar{position:sticky;top:0;z-index:20;box-shadow:0 3px 12px #0b162c1a}
 
 @media(max-width:700px){.mobile-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}.mobile-nav button{min-width:0;min-height:44px}}
