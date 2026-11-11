@@ -6,7 +6,7 @@ import {type BalanceDraft,inputBalance,validBalance} from '../lib/audit-input';
 
 const num=(n:number)=>new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(n);
 const round=(n:number)=>Math.round(n*1e6)/1e6;
-const importedTabs:Record<string,string>={C:'Wise',D:'Binance',E:'Saudi bank',F:'Cash',G:'Rent',H:'Bills',I:'FlyNas',J:'Udhaar',K:'PKR bank',L:'Sister',M:'Sheet M'};
+const importedTabs:Record<string,string>={C:'Wise',D:'Binance',E:'Saudi bank',F:'Cash',G:'Rent',H:'Bills',I:'FlyNas',J:'Udhaar',K:'My PKR',L:'Sister PKR',M:'Sister SAR'};
 
 export default function AuditFlow({s,entry,busy,onSave}:{s:State;entry?:Entry;busy:boolean;onSave:(entry:Entry)=>Promise<void>}){
  const [expected]=useState(()=>entry?.legs??balances(s));
@@ -68,7 +68,7 @@ export default function AuditFlow({s,entry,busy,onSave}:{s:State;entry?:Entry;bu
     <div className="audit-balance-heading"><strong>{a.name}</strong><span>{a.currency}</span></div>
     <div className="audit-balance-amount"><input readOnly inputMode="none" aria-label={a.name+' actual balance'} aria-describedby="audit-amount-hint" value={draft.value} placeholder="0" disabled={busy}/><button type="button" disabled={busy} onClick={draft.value===''&&undo[active]?restore:clear}>{draft.value===''&&undo[active]?'Undo clear':'Clear'}</button></div>
     <div className="audit-balance-hint"><p id="audit-amount-hint">{entry?'Recorded':'Estimate'}: {num(expected[active]||0)} {a.currency}<br/>{!draft.entered?'First digit replaces the prefilled value.':!validBalance(draft.value)?'Enter 0 if the account is empty.':'Draft retained. Switch tabs freely.'}</p><button type="button" disabled={busy} aria-label="Toggle negative amount" onClick={()=>key('sign')}>±</button></div>
-    <p className="audit-account-context">{a.kind==='savings'?'Included in savings':a.kind==='reserve'?'Reserved for expenses · excluded from savings':'Tracked separately · excluded from savings'}{a.id==='M'&&a.name==='Other SAR'?' · imported from column M':''}</p>
+    <p className="audit-account-context">{a.kind==='savings'?'Included in savings':a.kind==='reserve'?'Reserved for expenses · excluded from savings':'Tracked separately · excluded from savings'}</p>
    </section>
    <div className="audit-flow-error" role="alert">{err}</div>
    <div className="audit-number-pad" role="group" aria-label="Balance number pad">{['1','2','3','4','5','6','7','8','9','.','0','Backspace'].map(k=><button type="button" key={k} aria-label={k==='Backspace'?'Delete digit':k==='.'?'Decimal point':k} disabled={busy} onClick={()=>key(k)}>{k==='Backspace'?<Delete size={22}/>:k}</button>)}</div>
