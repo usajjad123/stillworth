@@ -29,3 +29,7 @@ The ledger is stored as a versioned JSONB document in Postgres. Writes use optim
 ## Deployment
 
 Connect this GitHub repository to the Vercel project. Connect the Neon **free** integration to production, add `LEDGER_ACCESS_MODE`, apply the schema, import the current backup, and deploy. Current production uses `public-link` with Vercel Authentication disabled, as requested by the owner. Add application sign-in before supporting separate users. Do not point preview deployments at production data when collaborating with others.
+
+## Canonical checkout and Git deployment
+
+The canonical local checkout is `/Users/urwahsajjad/Projects/stillworth`. Source is in `https://github.com/usajjad123/stillworth`. Pushes to `main` deploy through the connected personal Vercel project `stillworth` in `usajjad123s-projects`. Manual deployments must explicitly use `--scope usajjad123s-projects`; never use Skoop for this app.
