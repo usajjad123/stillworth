@@ -33,3 +33,5 @@ Connect this GitHub repository to the Vercel project. Connect the Neon **free** 
 ## Canonical checkout and Git deployment
 
 The canonical local checkout is `/Users/urwahsajjad/Projects/stillworth`. Source is in `https://github.com/usajjad123/stillworth`. Pushes to `main` deploy through the connected personal Vercel project `stillworth` in `usajjad123s-projects`. Manual deployments must explicitly use `--scope usajjad123s-projects`; never use Skoop for this app.
+
+GitHub-to-Vercel connection verified on 12 November 2026. The connected `main` branch is the production branch in the personal workspace.
