@@ -35,3 +35,5 @@ Connect this GitHub repository to the Vercel project. Connect the Neon **free** 
 The canonical local checkout is `/Users/urwahsajjad/Projects/stillworth`. Source is in `https://github.com/usajjad123/stillworth`. Pushes to `main` deploy through the connected personal Vercel project `stillworth` in `usajjad123s-projects`. Manual deployments must explicitly use `--scope usajjad123s-projects`; never use Skoop for this app.
 
 GitHub-to-Vercel connection verified on 12 November 2026. The connected `main` branch is the production branch in the personal workspace.
+
+Audit balances accept arithmetic such as `1200+3500`, `=(1200+3500)/2`, and negative amounts. The raw expression is saved in `balanceExpressions` while `legs` keeps the calculated numeric snapshot. Historical corrections reopen the original expressions. The server validates each expression against its balance; calculations support parentheses and +, -, *, / without executing code, and round to six decimal places. Account balance references are not supported yet.

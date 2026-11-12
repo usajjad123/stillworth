@@ -69,3 +69,8 @@ button,input,select,textarea{font:inherit}textarea{resize:vertical;min-width:0;w
 .topbar{position:sticky;top:0;z-index:20;box-shadow:0 3px 12px #0b162c1a}
 
 @media(max-width:700px){.mobile-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}.mobile-nav button{min-width:0;min-height:44px}}
+
+/* Native amount editing with a quiet, visible focus state. */
+.modal input:focus,.modal select:focus,.modal textarea:focus{outline:none;border-color:#4a67aa;box-shadow:0 0 0 2px #284bd218}.modal .audit-balance-amount input:focus{outline:none;box-shadow:none;border-bottom-color:#284bd2}.audit-number-pad{grid-template-columns:repeat(4,minmax(0,1fr))}.audit-expression-tools{display:flex;flex-shrink:0}.audit-balance-hint .audit-expression-tools button{width:36px;min-width:36px;min-height:44px;font-size:18px}.audit-balance-hint p{flex:1;min-width:0}.audit-calculation-result{color:#34509b;font-size:12px;line-height:1.5;margin:4px 0 7px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.audit-calculation-result.invalid{color:#8c3522}.audit-review-list small{overflow-wrap:anywhere}.modal .audit-balance-amount input{font-size:36px}
+
+.modal .audit-balance-amount input.has-expression{font-size:28px}.audit-account-tabs button[data-status=invalid] i{background:#ac3b26}

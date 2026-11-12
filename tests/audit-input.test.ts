@@ -13,7 +13,7 @@ test('decimal, deletion and negative balances stay valid without accepting an em
  let d={value:'75000',entered:false,kept:false};
  d=inputBalance(d,'.');d=inputBalance(d,'5');d=inputBalance(d,'sign');
  assert.equal(d.value,'-0.5');assert.ok(validBalance(d.value));
- assert.equal(inputBalance(d,'.').value,'-0.5');
+ assert.ok(!validBalance(inputBalance(d,'.').value));
  assert.equal(inputBalance(d,'Backspace').value,'-0.');
  assert.ok(!validBalance(''));assert.ok(!validBalance('-'));assert.ok(validBalance('0'));
  assert.ok(!validBalance('Infinity'));assert.ok(!validBalance('1000000000001'));
@@ -24,4 +24,14 @@ test('free text descriptions survive API validation and remain optional',()=>{
  assert.equal(result.state.events[0].description,state.events[0].description);
  assert.ok(schema.safeParse({revision:1,state:{...state,events:[{...state.events[0],description:undefined}]}}).success);
  assert.ok(!schema.safeParse({revision:1,state:{...state,events:[{...state.events[0],description:'x'.repeat(2001)}]}}).success);
+});
+
+test('keypad replaces full or partial selections and inserts at the caret',()=>{
+ const d={value:'12345',entered:true,kept:false};
+ assert.equal(inputBalance(d,'8',{start:0,end:5}).value,'8');
+ assert.equal(inputBalance(d,'8',{start:1,end:4}).value,'185');
+ assert.equal(inputBalance(d,'+',{start:2,end:2}).value,'12+345');
+ assert.equal(inputBalance(d,'Backspace',{start:1,end:4}).value,'15');
+ assert.equal(inputBalance(d,'Backspace',{start:2,end:2}).value,'1345');
+ assert.equal(inputBalance({...d,entered:false},'8',{start:1,end:4}).value,'185');
 });
