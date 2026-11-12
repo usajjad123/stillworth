@@ -1,9 +1,9 @@
 export type AmountResult={ok:true;value:number}|{ok:false;error:string};
-export function evaluateAmount(expression:string):AmountResult{
+export function evaluateAmount(expression:string,resolveBalance?:(reference:string)=>number):AmountResult{
  const source=expression.trim().replace(/^=/,'').replaceAll('×','*').replaceAll('÷','/').replaceAll('−','-');
  if(!source)return {ok:false,error:'Enter an amount.'};
  if(source.length>200)return {ok:false,error:'Keep the calculation under 200 characters.'};
- if(/[^\d\s.+\-*/()]/.test(source))return {ok:false,error:'Use numbers, parentheses, and + − × ÷.'};
+ if(!resolveBalance&&/[^\d\s.+\-*/()]/.test(source))return {ok:false,error:'Use numbers, parentheses, and + − × ÷.'};
  let index=0,depth=0;
  const space=()=>{while(index<source.length&&/\s/.test(source[index]))index++};
  const check=(value:number)=>{if(!Number.isFinite(value))throw Error('The calculation is too large.');return value};
@@ -11,6 +11,15 @@ export function evaluateAmount(expression:string):AmountResult{
   space();if(++depth>24)throw Error('Too many nested operations.');
   try{
    const token=source[index];
+   const balance=source.slice(index).match(/^Bal\s*\(\s*("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^()]+?)\s*\)/i);
+   if(balance){
+    if(!resolveBalance)throw Error('Balance references need an audit.');
+    index+=balance[0].length;
+    const raw=balance[1].trim();
+    const reference=raw.startsWith('"')?JSON.parse(raw):raw.startsWith("'")?raw.slice(1,-1).replace(/\\'/g,"'"):raw;
+    if(!reference)throw Error('Choose an account for Bal().');
+    return check(resolveBalance(reference));
+   }
    if(token==='+'||token==='-'){index++;return (token==='-'?-1:1)*atom()}
    if(token==='('){index++;const value=sum();space();if(source[index++]!==')')throw Error('Close the parentheses.');return value}
    const number=source.slice(index).match(/^(?:\d+(?:\.\d*)?|\.\d+)/);

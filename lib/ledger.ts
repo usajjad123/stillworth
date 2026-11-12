@@ -1,5 +1,5 @@
 export type Account = {id:string;name:string;currency:string;kind:'savings'|'reserve'|'excluded'};
-export type Entry = {id:string;date:string;note:string;description?:string;balanceExpressions?:Record<string,string>;type:string;legs:Record<string,number>;order:number;source?:string;recordedSavings?:number|null;expectedSavings?:number;adjustment?:number;auditRates?:Record<string,number>;deleted?:boolean};
+export type Entry = {id:string;date:string;note:string;description?:string;balanceExpressions?:Record<string,string>;balanceReferences?:Record<string,string>;type:string;legs:Record<string,number>;order:number;source?:string;recordedSavings?:number|null;expectedSavings?:number;adjustment?:number;auditRates?:Record<string,number>;deleted?:boolean};
 export type State = {accounts:Account[];events:Entry[];rates:Record<string,number>;rateNote:string;version:number};
 export function audits(s:State) {return s.events.filter(e=>e.type==='audit'&&!e.deleted).sort((a,b)=>a.order-b.order)}
 export function latest(s:State) {return audits(s).at(-1)!}
